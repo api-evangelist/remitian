@@ -1,0 +1,144 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "remitian": "https://remitian.com/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "TaxPayment": {
+      "@id": "remitian:TaxPayment",
+      "@context": {
+        "paymentId": "remitian:paymentId",
+        "status": "remitian:paymentStatus",
+        "amount": {
+          "@id": "schema:amount",
+          "@type": "xsd:decimal"
+        },
+        "currency": {
+          "@id": "schema:currency",
+          "@type": "xsd:string"
+        },
+        "taxType": "remitian:taxType",
+        "taxPeriod": "remitian:taxPeriod",
+        "jurisdictionId": "remitian:jurisdictionId",
+        "accountId": "remitian:accountId",
+        "taxIdentifier": "remitian:taxIdentifier",
+        "confirmationNumber": "remitian:confirmationNumber",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "TaxJurisdiction": {
+      "@id": "remitian:TaxJurisdiction",
+      "@context": {
+        "jurisdictionId": "remitian:jurisdictionId",
+        "name": "schema:name",
+        "country": {
+          "@id": "schema:addressCountry",
+          "@type": "xsd:string"
+        },
+        "jurisdictionType": "remitian:jurisdictionType",
+        "taxTypes": {
+          "@id": "remitian:taxTypes",
+          "@container": "@set"
+        },
+        "requiredFields": {
+          "@id": "remitian:requiredFields",
+          "@container": "@set"
+        },
+        "paymentMethods": {
+          "@id": "schema:paymentMethod",
+          "@container": "@set"
+        },
+        "active": {
+          "@id": "remitian:active",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "ClientAccount": {
+      "@id": "remitian:ClientAccount",
+      "@context": {
+        "accountId": "remitian:accountId",
+        "name": "schema:name",
+        "email": {
+          "@id": "schema:email",
+          "@type": "xsd:string"
+        },
+        "taxIdentifier": "remitian:taxIdentifier",
+        "bankConnections": {
+          "@id": "remitian:bankConnections",
+          "@container": "@set"
+        },
+        "status": "remitian:accountStatus",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "BankConnection": {
+      "@id": "remitian:BankConnection",
+      "@context": {
+        "connectionId": "remitian:connectionId",
+        "institutionName": "schema:name",
+        "accountLast4": "remitian:accountLast4",
+        "status": "remitian:connectionStatus",
+        "verifiedAt": {
+          "@id": "remitian:verifiedAt",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AuditLogEntry": {
+      "@id": "remitian:AuditLogEntry",
+      "@context": {
+        "entryId": "remitian:entryId",
+        "paymentId": "remitian:paymentId",
+        "accountId": "remitian:accountId",
+        "eventType": "remitian:eventType",
+        "description": "schema:description",
+        "actor": "remitian:actor",
+        "ipAddress": "remitian:ipAddress",
+        "timestamp": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "WebhookSubscription": {
+      "@id": "remitian:WebhookSubscription",
+      "@context": {
+        "webhookId": "remitian:webhookId",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "events": {
+          "@id": "remitian:subscribedEvents",
+          "@container": "@set"
+        },
+        "active": {
+          "@id": "remitian:active",
+          "@type": "xsd:boolean"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

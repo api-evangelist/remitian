@@ -1,0 +1,219 @@
+asyncapi: 2.6.0
+info:
+  title: Remitian Tax Payment Events
+  description: >-
+    Real-time webhook events from the Remitian Tax Payment API. These events
+    provide status updates for tax payments as they move through initiation,
+    validation, processing, and completion. All webhook deliveries include an
+    HMAC signature header for authenticity verification using the signing
+    secret provided during webhook subscription creation.
+  version: '1.0.0'
+  contact:
+    name: Remitian Support
+    url: https://help.remitian.com
+servers:
+  partner:
+    url: '{webhookUrl}'
+    protocol: https
+    description: >-
+      Partner-provided webhook endpoint. Remitian delivers events to the
+      HTTPS URL registered via the Webhooks API.
+    variables:
+      webhookUrl:
+        description: The webhook endpoint URL configured by the partner
+    security:
+      - hmacSignature: []
+channels:
+  /webhook:
+    description: >-
+      Webhook delivery channel for all Remitian tax payment events. Events
+      are delivered as HTTP POST requests with a JSON payload and an
+      X-Remitian-Signature header containing the HMAC-SHA256 signature.
+    publish:
+      operationId: receivePaymentEvent
+      summary: Receive a tax payment event
+      description: >-
+        Receive real-time notifications about tax payment lifecycle events.
+        Partners should respond with a 2xx status code within 30 seconds
+        to acknowledge receipt. Failed deliveries are retried with
+        exponential backoff.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/PaymentInitiated'
+          - $ref: '#/components/messages/PaymentValidated'
+          - $ref: '#/components/messages/PaymentConfirmed'
+          - $ref: '#/components/messages/PaymentProcessing'
+          - $ref: '#/components/messages/PaymentCompleted'
+          - $ref: '#/components/messages/PaymentFailed'
+          - $ref: '#/components/messages/PaymentCancelled'
+components:
+  securitySchemes:
+    hmacSignature:
+      type: httpApiKey
+      name: X-Remitian-Signature
+      in: header
+      description: >-
+        HMAC-SHA256 signature of the request body using the signing secret
+        provided during webhook subscription creation. Verify this signature
+        to ensure the webhook delivery originated from Remitian.
+  messages:
+    PaymentInitiated:
+      name: payment.initiated
+      title: Payment Initiated
+      summary: A new tax payment has been initiated
+      description: >-
+        Fired when a new tax payment is created via the API. The payment
+        is in draft status and awaits validation and confirmation.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentEvent'
+    PaymentValidated:
+      name: payment.validated
+      title: Payment Validated
+      summary: A tax payment has passed jurisdiction validation
+      description: >-
+        Fired when a payment passes all jurisdiction-specific validation
+        checks and is ready for confirmation.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentEvent'
+    PaymentConfirmed:
+      name: payment.confirmed
+      title: Payment Confirmed
+      summary: A tax payment has been confirmed for processing
+      description: >-
+        Fired when a partner confirms a validated payment. The payment is
+        now queued for routing to the tax authority.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentEvent'
+    PaymentProcessing:
+      name: payment.processing
+      title: Payment Processing
+      summary: A tax payment is being processed by the tax authority
+      description: >-
+        Fired when the payment has been submitted to the tax authority
+        and is awaiting confirmation of receipt and processing.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentEvent'
+    PaymentCompleted:
+      name: payment.completed
+      title: Payment Completed
+      summary: A tax payment has been successfully completed
+      description: >-
+        Fired when the tax authority confirms successful receipt and
+        processing of the payment. The payment now includes a
+        confirmation number from the authority.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentCompletedEvent'
+    PaymentFailed:
+      name: payment.failed
+      title: Payment Failed
+      summary: A tax payment has failed
+      description: >-
+        Fired when a payment fails during processing. Includes an error
+        code and description of the failure reason. The partner may
+        need to take corrective action and retry.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentFailedEvent'
+    PaymentCancelled:
+      name: payment.cancelled
+      title: Payment Cancelled
+      summary: A tax payment has been cancelled
+      description: >-
+        Fired when a payment is cancelled either by the partner or by
+        the system due to expiration or other automated rules.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/PaymentEvent'
+  schemas:
+    PaymentEvent:
+      type: object
+      required:
+        - id
+        - type
+        - timestamp
+        - data
+      properties:
+        id:
+          type: string
+          description: Unique event identifier for idempotency
+        type:
+          type: string
+          description: Event type identifier
+          enum:
+            - payment.initiated
+            - payment.validated
+            - payment.confirmed
+            - payment.processing
+            - payment.completed
+            - payment.failed
+            - payment.cancelled
+        timestamp:
+          type: string
+          format: date-time
+          description: When the event occurred
+        data:
+          type: object
+          properties:
+            paymentId:
+              type: string
+              description: Unique payment identifier
+            status:
+              type: string
+              description: Current payment status
+            amount:
+              type: number
+              format: double
+              description: Payment amount
+            currency:
+              type: string
+              description: Three-letter ISO 4217 currency code
+            taxType:
+              type: string
+              description: Type of tax being paid
+            taxPeriod:
+              type: string
+              description: Tax period for the payment
+            jurisdictionId:
+              type: string
+              description: Target tax jurisdiction identifier
+            accountId:
+              type: string
+              description: Client account identifier
+    PaymentCompletedEvent:
+      allOf:
+        - $ref: '#/components/schemas/PaymentEvent'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                confirmationNumber:
+                  type: string
+                  description: >-
+                    Confirmation number issued by the tax authority
+                completedAt:
+                  type: string
+                  format: date-time
+                  description: Timestamp of successful completion
+    PaymentFailedEvent:
+      allOf:
+        - $ref: '#/components/schemas/PaymentEvent'
+        - type: object
+          properties:
+            data:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                  description: Machine-readable error code
+                errorMessage:
+                  type: string
+                  description: Human-readable failure description
+                retryable:
+                  type: boolean
+                  description: Whether the payment can be retried

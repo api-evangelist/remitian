@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://remitian.com/schemas/remitian/payment.json",
+  "title": "Remitian Tax Payment",
+  "description": "Schema representing a tax payment processed through the Remitian Tax Payment API, covering the full lifecycle from initiation through validation, confirmation, and completion.",
+  "type": "object",
+  "required": [
+    "id",
+    "status",
+    "amount",
+    "currency",
+    "taxType",
+    "taxPeriod",
+    "jurisdictionId",
+    "accountId"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique payment identifier assigned by Remitian"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current lifecycle status of the payment",
+      "enum": [
+        "draft",
+        "validated",
+        "confirmed",
+        "processing",
+        "completed",
+        "failed",
+        "cancelled"
+      ]
+    },
+    "amount": {
+      "type": "number",
+      "description": "Payment amount in the specified currency",
+      "minimum": 0.01
+    },
+    "currency": {
+      "type": "string",
+      "description": "Three-letter ISO 4217 currency code",
+      "pattern": "^[A-Z]{3}$",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "taxType": {
+      "type": "string",
+      "description": "Type of tax being paid, as defined by the target jurisdiction",
+      "minLength": 1
+    },
+    "taxPeriod": {
+      "type": "string",
+      "description": "Tax period the payment applies to (e.g., 2025, 2025-Q4, 2025-03)",
+      "pattern": "^\\d{4}(-Q[1-4]|-\\d{2})?$"
+    },
+    "jurisdictionId": {
+      "type": "string",
+      "description": "Identifier of the target tax jurisdiction"
+    },
+    "accountId": {
+      "type": "string",
+      "description": "Identifier of the client account making the payment"
+    },
+    "taxIdentifier": {
+      "type": "string",
+      "description": "Taxpayer identification number (EIN, SSN, BN) as required by the jurisdiction"
+    },
+    "validationResults": {
+      "$ref": "#/$defs/ValidationResult"
+    },
+    "confirmationNumber": {
+      "type": "string",
+      "description": "Confirmation number issued by the tax authority upon successful processing"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the payment was initiated"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the last status update"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Arbitrary key-value pairs for partner-specific reference data"
+    }
+  },
+  "$defs": {
+    "ValidationResult": {
+      "type": "object",
+      "description": "Results of jurisdiction-specific payment validation",
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Whether the payment passed all validation checks"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Validation errors that must be resolved before confirmation",
+          "items": {
+            "$ref": "#/$defs/ValidationIssue"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Validation warnings that may need attention",
+          "items": {
+            "$ref": "#/$defs/ValidationIssue"
+          }
+        }
+      }
+    },
+    "ValidationIssue": {
+      "type": "object",
+      "description": "A single validation error or warning",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable validation issue code"
+        },
+        "field": {
+          "type": "string",
+          "description": "The field that triggered the validation issue"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of the issue"
+        }
+      }
+    },
+    "Jurisdiction": {
+      "type": "object",
+      "description": "A tax jurisdiction supported by Remitian",
+      "required": [
+        "id",
+        "name",
+        "country",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique jurisdiction identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the tax jurisdiction"
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code",
+          "pattern": "^[A-Z]{2}$",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "type": {
+          "type": "string",
+          "description": "Level of government",
+          "enum": [
+            "federal",
+            "state",
+            "provincial",
+            "local"
+          ]
+        },
+        "taxTypes": {
+          "type": "array",
+          "description": "Tax types accepted by this jurisdiction",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFields": {
+          "type": "array",
+          "description": "Fields required for payment submission to this jurisdiction",
+          "items": {
+            "type": "string"
+          }
+        },
+        "paymentMethods": {
+          "type": "array",
+          "description": "Accepted payment methods",
+          "items": {
+            "type": "string"
+          }
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this jurisdiction is currently active for payments"
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "description": "A client account registered for tax payment processing",
+      "required": [
+        "id",
+        "name",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique account identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name for the client account",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email for the account"
+        },
+        "taxIdentifier": {
+          "type": "string",
+          "description": "Primary taxpayer identification number"
+        },
+        "bankConnections": {
+          "type": "array",
+          "description": "Linked and verified bank connections",
+          "items": {
+            "$ref": "#/$defs/BankConnection"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Account verification status",
+          "enum": [
+            "pending",
+            "verified",
+            "suspended"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the account was created"
+        }
+      }
+    },
+    "BankConnection": {
+      "type": "object",
+      "description": "A verified bank connection linked to a client account",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique bank connection identifier"
+        },
+        "institutionName": {
+          "type": "string",
+          "description": "Name of the banking institution"
+        },
+        "accountLast4": {
+          "type": "string",
+          "description": "Last four digits of the bank account number",
+          "pattern": "^\\d{4}$"
+        },
+        "status": {
+          "type": "string",
+          "description": "Connection verification status",
+          "enum": [
+            "pending",
+            "verified",
+            "failed"
+          ]
+        },
+        "verifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the connection was verified"
+        }
+      }
+    },
+    "AuditLogEntry": {
+      "type": "object",
+      "description": "A bank-grade audit log entry tracking payment events",
+      "required": [
+        "id",
+        "eventType",
+        "timestamp"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique audit log entry identifier"
+        },
+        "paymentId": {
+          "type": "string",
+          "description": "Associated payment identifier"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Associated account identifier"
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Type of audit event"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the event"
+        },
+        "actor": {
+          "type": "string",
+          "description": "Identifier of the user or system that triggered the event"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address of the request that triggered the event"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the event occurred"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Additional context for the audit event"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+aid: remitian
+url: https://raw.githubusercontent.com/api-evangelist/remitian/refs/heads/main/apis.yml
+apis:
+  - aid: remitian:tax-payment-api
+    name: Remitian Tax Payment API
+    tags:
+      - Tax
+      - Payments
+      - Fintech
+      - Accounting
+      - Webhooks
+      - Embedded Payments
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    baseURL: https://api.remitian.com
+    humanURL: https://remitian.com/integrations/integrate-remitian
+    properties:
+      - url: https://remitian.com/integrations/integrate-remitian
+        type: Documentation
+      - type: OpenAPI
+        url: openapi/remitian-tax-payment-openapi.yml
+      - type: AsyncAPI
+        url: asyncapi/remitian-tax-payment-asyncapi.yml
+    description: >-
+      The Remitian Tax Payment API enables tax software providers and accounting
+      firms to embed tax payment initiation, validation, and confirmation
+      directly within their existing platforms. Described as the "Stripe for
+      tax," the API acts as a unified gateway to multiple tax authorities,
+      replacing manual government portal logins with automated,
+      jurisdiction-aware payment infrastructure. It provides real-time status
+      updates via webhooks and bank-grade audit logs to track every payment from
+      initiation to completion. Built by accountants for accountants, the API
+      supports managing payments across multiple tax jurisdictions from a single
+      integration point.
+modified: '2026-03-24'
+common:
+  - type: Website
+    url: https://remitian.com
+  - type: Integrations
+    url: https://remitian.com/integrations
+  - type: About
+    url: https://remitian.com/about-us
+  - type: Help Center
+    url: https://help.remitian.com
+  - type: JSONSchema
+    url: json-schema/remitian-payment-schema.json
+  - type: JSON-LD
+    url: json-ld/remitian-context.jsonld
