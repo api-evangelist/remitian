@@ -24,14 +24,6 @@ servers:
   - url: https://api.remitian.com
     description: Production Server
 tags:
-  - name: Payments
-    description: >-
-      Initiate, validate, and confirm tax payments across multiple
-      jurisdictions through a single unified gateway.
-  - name: Jurisdictions
-    description: >-
-      Retrieve and manage supported tax jurisdictions and their associated
-      payment requirements and routing rules.
   - name: Accounts
     description: >-
       Manage client accounts and their linked bank connections for
@@ -40,6 +32,14 @@ tags:
     description: >-
       Access bank-grade audit logs that track every payment from initiation
       to completion for compliance and reconciliation.
+  - name: Jurisdictions
+    description: >-
+      Retrieve and manage supported tax jurisdictions and their associated
+      payment requirements and routing rules.
+  - name: Payments
+    description: >-
+      Initiate, validate, and confirm tax payments across multiple
+      jurisdictions through a single unified gateway.
   - name: Webhooks
     description: >-
       Manage webhook subscriptions for real-time payment status updates
