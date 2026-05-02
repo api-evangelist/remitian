@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.remitian.com/v1/jurisdictions?country=US&type=federal",
+    "headers": {
+      "Authorization": "Bearer {api_key}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "us-irs",
+          "name": "Internal Revenue Service",
+          "country": "US",
+          "type": "federal",
+          "taxTypes": ["income_tax", "estimated_tax", "payroll_tax", "excise_tax"],
+          "requiredFields": ["taxIdentifier", "taxPeriod", "taxType"],
+          "paymentMethods": ["ach", "wire"],
+          "active": true
+        }
+      ],
+      "pagination": {
+        "total": 1,
+        "limit": 25,
+        "offset": 0,
+        "hasMore": false
+      }
+    }
+  }
+}

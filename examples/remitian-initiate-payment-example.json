@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.remitian.com/v1/payments",
+    "headers": {
+      "Authorization": "Bearer {api_key}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "amount": 15000.00,
+      "currency": "USD",
+      "taxType": "income_tax",
+      "taxPeriod": "2025",
+      "jurisdictionId": "us-irs",
+      "accountId": "acct_12345",
+      "taxIdentifier": "12-3456789",
+      "metadata": {
+        "client_ref": "CLIENT-2025-001",
+        "preparer_id": "PREPARER-42"
+      }
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "id": "pay_7f4a3b2c1d",
+      "status": "draft",
+      "amount": 15000.00,
+      "currency": "USD",
+      "taxType": "income_tax",
+      "taxPeriod": "2025",
+      "jurisdictionId": "us-irs",
+      "accountId": "acct_12345",
+      "taxIdentifier": "12-3456789",
+      "validationResults": null,
+      "confirmationNumber": null,
+      "createdAt": "2026-05-02T10:00:00Z",
+      "updatedAt": "2026-05-02T10:00:00Z",
+      "metadata": {
+        "client_ref": "CLIENT-2025-001",
+        "preparer_id": "PREPARER-42"
+      }
+    }
+  }
+}

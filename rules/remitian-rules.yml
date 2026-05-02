@@ -1,0 +1,107 @@
+rules:
+  remitian-operation-ids-camel-case:
+    description: Operation IDs must use camelCase
+    message: "Operation ID '{{value}}' must use camelCase"
+    severity: error
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  remitian-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' must use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 -]*$"
+
+  remitian-tags-required:
+    description: Every operation must have at least one tag
+    message: Operation must include at least one tag
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  remitian-bearer-auth:
+    description: API must define Bearer JWT authentication
+    message: API must define bearerAuth security scheme
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: bearerAuth
+      function: truthy
+
+  remitian-v1-path-prefix:
+    description: All paths must begin with /v1/
+    message: "Path '{{property}}' must start with /v1/"
+    severity: error
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/v1/"
+
+  remitian-path-kebab-case:
+    description: Path segments must use kebab-case
+    message: "Path '{{property}}' must use kebab-case segments"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/v1/[a-z0-9{}-]+)+(/[a-z0-9{}-]+)*$"
+
+  remitian-payment-status-enum:
+    description: Payment status fields should use the canonical enum values
+    message: Payment status must be one of the canonical lifecycle values
+    severity: warn
+    given: "$.components.schemas.*.properties.status.enum"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+
+  remitian-401-on-protected-operations:
+    description: All protected operations must define a 401 response
+    message: Operation must define a 401 Unauthorized response
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: truthy
+
+  remitian-post-request-body-required:
+    description: POST operations must define a requestBody
+    message: POST operations must include a request body schema
+    severity: error
+    given: "$.paths[*].post"
+    then:
+      field: requestBody
+      function: truthy
+
+  remitian-pagination-on-list-endpoints:
+    description: List endpoints should support pagination parameters
+    message: Collection GET endpoints should include limit and offset parameters
+    severity: warn
+    given: "$.paths[?(!/@id)].get"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  remitian-component-refs-used:
+    description: Schemas should use $ref to components where available
+    message: Prefer $ref to shared components over inline schema definitions
+    severity: info
+    given: "$.paths[*][*].responses[*].content.application/json"
+    then:
+      field: schema
+      function: truthy

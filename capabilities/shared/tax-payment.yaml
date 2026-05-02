@@ -1,0 +1,523 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Remitian Tax Payment API
+  description: >-
+    Remitian Tax Payment API — unified gateway to multiple tax authorities
+    enabling embedded payment initiation, validation, confirmation, and
+    webhook-based status tracking. Supports payments, jurisdictions, accounts,
+    audit logs, and webhook subscriptions.
+  tags:
+    - Remitian
+    - Tax
+    - Payments
+    - Fintech
+    - Accounting
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      REMITIAN_API_KEY: REMITIAN_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: remitian-tax
+      baseUri: https://api.remitian.com
+      description: Remitian Tax Payment REST API
+      authentication:
+        type: bearer
+        token: "{{REMITIAN_API_KEY}}"
+      resources:
+        - name: payments
+          path: /v1/payments
+          description: Tax payment lifecycle management
+          operations:
+            - name: list-payments
+              method: GET
+              description: List tax payments with optional jurisdiction, status, and date filters
+              inputParameters:
+                - name: jurisdictionId
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by jurisdiction identifier
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by payment status
+                - name: dateFrom
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter from date (ISO 8601)
+                - name: dateTo
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter to date (ISO 8601)
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum results per page
+                - name: offset
+                  in: query
+                  type: integer
+                  required: false
+                  description: Pagination offset
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: initiate-payment
+              method: POST
+              description: Initiate a new tax payment to a specific jurisdiction
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+                  currency: "{{tools.currency}}"
+                  taxType: "{{tools.taxType}}"
+                  taxPeriod: "{{tools.taxPeriod}}"
+                  jurisdictionId: "{{tools.jurisdictionId}}"
+                  accountId: "{{tools.accountId}}"
+                  taxIdentifier: "{{tools.taxIdentifier}}"
+            - name: get-payment
+              method: GET
+              description: Retrieve full details of a specific tax payment
+              inputParameters:
+                - name: paymentId
+                  in: path
+                  type: string
+                  required: true
+                  description: Payment identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: validate-payment
+              method: POST
+              description: Run jurisdiction-specific validation on a payment
+              inputParameters:
+                - name: paymentId
+                  in: path
+                  type: string
+                  required: true
+                  description: Payment identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: confirm-payment
+              method: POST
+              description: Confirm a validated payment for irreversible processing
+              inputParameters:
+                - name: paymentId
+                  in: path
+                  type: string
+                  required: true
+                  description: Payment identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: cancel-payment
+              method: POST
+              description: Cancel a payment that has not yet been confirmed
+              inputParameters:
+                - name: paymentId
+                  in: path
+                  type: string
+                  required: true
+                  description: Payment identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: jurisdictions
+          path: /v1/jurisdictions
+          description: Supported tax jurisdictions
+          operations:
+            - name: list-jurisdictions
+              method: GET
+              description: List all supported tax jurisdictions with optional country filter
+              inputParameters:
+                - name: country
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by ISO 3166-1 alpha-2 country code
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by jurisdiction type (federal, state, provincial, local)
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-jurisdiction
+              method: GET
+              description: Get detailed information about a specific tax jurisdiction
+              inputParameters:
+                - name: jurisdictionId
+                  in: path
+                  type: string
+                  required: true
+                  description: Jurisdiction identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: accounts
+          path: /v1/accounts
+          description: Client account management
+          operations:
+            - name: list-accounts
+              method: GET
+              description: List client accounts registered for tax payment processing
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-account
+              method: POST
+              description: Register a new client account for tax payment processing
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  email: "{{tools.email}}"
+                  taxIdentifier: "{{tools.taxIdentifier}}"
+            - name: get-account
+              method: GET
+              description: Get details of a specific client account
+              inputParameters:
+                - name: accountId
+                  in: path
+                  type: string
+                  required: true
+                  description: Account identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: audit-logs
+          path: /v1/audit-logs
+          description: Bank-grade payment audit logs
+          operations:
+            - name: list-audit-logs
+              method: GET
+              description: Retrieve audit logs for compliance and reconciliation
+              inputParameters:
+                - name: paymentId
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by payment identifier
+                - name: accountId
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by account identifier
+                - name: eventType
+                  in: query
+                  type: string
+                  required: false
+                  description: Filter by event type
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: webhooks
+          path: /v1/webhooks
+          description: Webhook subscription management
+          operations:
+            - name: list-webhooks
+              method: GET
+              description: List registered webhook subscriptions
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-webhook
+              method: POST
+              description: Register a new webhook endpoint for payment events
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  url: "{{tools.url}}"
+                  events: "{{tools.events}}"
+            - name: delete-webhook
+              method: DELETE
+              description: Remove a webhook subscription
+              inputParameters:
+                - name: webhookId
+                  in: path
+                  type: string
+                  required: true
+                  description: Webhook subscription identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: remitian-tax-api
+      resources:
+        - path: /v1/payments
+          name: payments
+          description: Tax payments
+          operations:
+            - method: GET
+              name: list-payments
+              description: List tax payments
+              call: "remitian-tax.list-payments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: initiate-payment
+              description: Initiate a tax payment
+              call: "remitian-tax.initiate-payment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/payments/{paymentId}
+          name: payment
+          description: Individual tax payment
+          operations:
+            - method: GET
+              name: get-payment
+              description: Get payment details
+              call: "remitian-tax.get-payment"
+              with:
+                paymentId: "rest.paymentId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/jurisdictions
+          name: jurisdictions
+          description: Tax jurisdictions
+          operations:
+            - method: GET
+              name: list-jurisdictions
+              description: List supported jurisdictions
+              call: "remitian-tax.list-jurisdictions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/accounts
+          name: accounts
+          description: Client accounts
+          operations:
+            - method: GET
+              name: list-accounts
+              description: List client accounts
+              call: "remitian-tax.list-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/audit-logs
+          name: audit-logs
+          description: Payment audit logs
+          operations:
+            - method: GET
+              name: list-audit-logs
+              description: List audit log entries
+              call: "remitian-tax.list-audit-logs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: remitian-tax-mcp
+      transport: http
+      tools:
+        - name: list-payments
+          description: List tax payments with optional filters for jurisdiction, status, and date range
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.list-payments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: initiate-payment
+          description: Initiate a new tax payment to a jurisdiction
+          hints:
+            readOnly: false
+            destructive: false
+          call: "remitian-tax.initiate-payment"
+          with:
+            amount: "tools.amount"
+            currency: "tools.currency"
+            taxType: "tools.taxType"
+            taxPeriod: "tools.taxPeriod"
+            jurisdictionId: "tools.jurisdictionId"
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-payment
+          description: Retrieve full details of a tax payment including validation results
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.get-payment"
+          with:
+            paymentId: "tools.paymentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-payment
+          description: Run jurisdiction-specific validation on a payment before confirming
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.validate-payment"
+          with:
+            paymentId: "tools.paymentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: confirm-payment
+          description: Confirm a validated payment for irreversible processing to the tax authority
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: false
+          call: "remitian-tax.confirm-payment"
+          with:
+            paymentId: "tools.paymentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: cancel-payment
+          description: Cancel a payment that has not yet been confirmed
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "remitian-tax.cancel-payment"
+          with:
+            paymentId: "tools.paymentId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-jurisdictions
+          description: Browse supported tax jurisdictions with optional country and type filters
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "remitian-tax.list-jurisdictions"
+          with:
+            country: "tools.country"
+            type: "tools.type"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-jurisdiction
+          description: Get detailed requirements for a specific tax jurisdiction
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "remitian-tax.get-jurisdiction"
+          with:
+            jurisdictionId: "tools.jurisdictionId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-accounts
+          description: List client accounts registered for tax payment processing
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.list-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-account
+          description: Register a new client account for tax payment processing
+          hints:
+            readOnly: false
+            destructive: false
+          call: "remitian-tax.create-account"
+          with:
+            name: "tools.name"
+            email: "tools.email"
+            taxIdentifier: "tools.taxIdentifier"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-audit-logs
+          description: Retrieve bank-grade audit logs for compliance and payment reconciliation
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.list-audit-logs"
+          with:
+            paymentId: "tools.paymentId"
+            accountId: "tools.accountId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-webhooks
+          description: List configured webhook subscriptions for payment events
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "remitian-tax.list-webhooks"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-webhook
+          description: Register a webhook endpoint to receive real-time tax payment events
+          hints:
+            readOnly: false
+            destructive: false
+          call: "remitian-tax.create-webhook"
+          with:
+            url: "tools.url"
+            events: "tools.events"
+          outputParameters:
+            - type: object
+              mapping: "$."

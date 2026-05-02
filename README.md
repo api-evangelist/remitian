@@ -1,52 +1,68 @@
-# Remitian (remitian)
-Remitian is a fintech platform that provides embedded tax payment infrastructure for tax software providers and accounting firms. Often described as the "Stripe for tax," Remitian offers a developer-friendly API that acts as a unified gateway to multiple tax authorities, enabling automated, jurisdiction-aware payment processing.
+# Remitian
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/remitian/refs/heads/main/apis.yml)
+Remitian is a fintech platform providing embedded tax payment infrastructure for tax software providers and accounting firms. Often described as the "Stripe for tax," Remitian acts as a unified gateway to multiple tax authorities, enabling automated, jurisdiction-aware payment processing without manual government portal logins.
 
-## Scope
+Remitian raised $7M in seed funding in March 2026 and launched its Tax Payment API to help partners embed payment initiation, validation, and confirmation directly within their platforms.
 
-- **Type:** Contract
-- **Position:** Consuming
-- **Access:** 3rd-Party
+## Links
 
-## Tags:
-
- - Tax, Payments, Fintech, Accounting, Webhooks, Embedded Payments
-
-## Timestamps
-
-- **Created:** 2026-03-24
-- **Modified:** 2026-03-24
+- **Website:** https://remitian.com
+- **Integration Docs:** https://remitian.com/integrations/integrate-remitian
+- **Help Center:** https://help.remitian.com
 
 ## APIs
 
-### Remitian Tax Payment API
-The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation, validation, and confirmation directly within their existing platforms. Described as the "Stripe for tax," the API acts as a unified gateway to multiple tax authorities, replacing manual government portal logins with automated, jurisdiction-aware payment infrastructure. It provides real-time status updates via webhooks and bank-grade audit logs to track every payment from initiation to completion. Built by accountants for accountants, the API supports managing payments across multiple tax jurisdictions from a single integration point.
+### Tax Payment API
+- **Base URL:** https://api.remitian.com
+- **Authentication:** Bearer token (JWT)
+- **Documentation:** https://remitian.com/integrations/integrate-remitian
+- **OpenAPI:** [openapi/remitian-tax-payment-openapi.yml](openapi/remitian-tax-payment-openapi.yml)
+- **AsyncAPI:** [asyncapi/remitian-tax-payment-asyncapi.yml](asyncapi/remitian-tax-payment-asyncapi.yml)
 
-**Human URL:** [https://remitian.com/integrations/integrate-remitian](https://remitian.com/integrations/integrate-remitian)
+**Endpoints:**
+- `GET/POST /v1/payments` — Payment lifecycle management
+- `POST /v1/payments/{id}/validate` — Jurisdiction validation
+- `POST /v1/payments/{id}/confirm` — Confirm for processing
+- `POST /v1/payments/{id}/cancel` — Cancel payment
+- `GET /v1/jurisdictions` — Browse supported authorities
+- `GET/POST /v1/accounts` — Client account management
+- `GET /v1/audit-logs` — Bank-grade audit log access
+- `GET/POST/DELETE /v1/webhooks` — Webhook subscriptions
 
+## Payment Lifecycle
 
-#### Tags:
+```
+draft → validated → confirmed → processing → completed
+                              ↘ failed
+```
 
- - Tax, Payments, Fintech, Accounting, Webhooks, Embedded Payments
+## Authentication
 
-#### Properties
+```
+Authorization: Bearer {api_key}
+```
 
-- [Documentation](https://remitian.com/integrations/integrate-remitian)
-- [OpenAPI](openapi/remitian-tax-payment-openapi.yml)
-- [AsyncAPI](asyncapi/remitian-tax-payment-asyncapi.yml)
+## Artifacts
 
-## Common Properties
+| Type | File |
+|---|---|
+| OpenAPI | [openapi/remitian-tax-payment-openapi.yml](openapi/remitian-tax-payment-openapi.yml) |
+| AsyncAPI | [asyncapi/remitian-tax-payment-asyncapi.yml](asyncapi/remitian-tax-payment-asyncapi.yml) |
+| JSON Schema | [json-schema/remitian-payment-schema.json](json-schema/remitian-payment-schema.json) |
+| JSON Structure | [json-structure/remitian-payment-structure.json](json-structure/remitian-payment-structure.json) |
+| JSON-LD Context | [json-ld/remitian-context.jsonld](json-ld/remitian-context.jsonld) |
+| Spectral Rules | [rules/remitian-rules.yml](rules/remitian-rules.yml) |
+| Vocabulary | [vocabulary/remitian-vocabulary.yml](vocabulary/remitian-vocabulary.yml) |
 
-- [Website](https://remitian.com)
-- [Integrations](https://remitian.com/integrations)
-- [About](https://remitian.com/about-us)
-- [Help Center](https://help.remitian.com)
-- [JSONSchema](json-schema/remitian-payment-schema.json)
-- [JSON-LD](json-ld/remitian-context.jsonld)
+## Capabilities
 
-## Maintainers
+| Capability | Description |
+|---|---|
+| [tax-payment-automation.yaml](capabilities/tax-payment-automation.yaml) | Full tax payment automation workflow |
+| [shared/tax-payment.yaml](capabilities/shared/tax-payment.yaml) | Tax Payment API shared definition |
 
-**FN:** API Evangelist
+## Examples
 
-**Email:** info@apievangelist.com
+- [Initiate Payment](examples/remitian-initiate-payment-example.json)
+- [Validate Payment](examples/remitian-validate-payment-example.json)
+- [List Jurisdictions](examples/remitian-list-jurisdictions-example.json)

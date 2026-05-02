@@ -1,0 +1,51 @@
+{
+  "name": "Payment",
+  "description": "Remitian tax payment lifecycle object structure",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique payment identifier" },
+    {
+      "name": "status",
+      "type": "string",
+      "required": true,
+      "enum": ["draft", "validated", "confirmed", "processing", "completed", "failed", "cancelled"],
+      "description": "Current payment lifecycle status"
+    },
+    { "name": "amount", "type": "number", "required": true, "description": "Payment amount", "minimum": 0.01 },
+    { "name": "currency", "type": "string", "required": true, "description": "ISO 4217 currency code (e.g., USD)" },
+    { "name": "taxType", "type": "string", "required": true, "description": "Type of tax (e.g., income_tax, payroll_tax)" },
+    { "name": "taxPeriod", "type": "string", "required": true, "description": "Tax period (e.g., 2025, 2025-Q4)" },
+    { "name": "jurisdictionId", "type": "string", "required": true, "description": "Target tax jurisdiction identifier" },
+    { "name": "accountId", "type": "string", "required": true, "description": "Client account making the payment" },
+    { "name": "taxIdentifier", "type": "string", "required": false, "description": "EIN, SSN, or BN as required by jurisdiction" },
+    { "name": "confirmationNumber", "type": "string", "required": false, "description": "Tax authority confirmation number (on completion)" },
+    {
+      "name": "validationResults",
+      "type": "object",
+      "required": false,
+      "description": "Jurisdiction validation results",
+      "fields": [
+        { "name": "valid", "type": "boolean", "required": true, "description": "Whether validation passed" },
+        {
+          "name": "errors",
+          "type": "array<ValidationIssue>",
+          "required": false,
+          "description": "Errors that must be resolved",
+          "fields": [
+            { "name": "code", "type": "string", "required": true, "description": "Machine-readable error code" },
+            { "name": "field", "type": "string", "required": false, "description": "Affected field name" },
+            { "name": "message", "type": "string", "required": true, "description": "Human-readable description" }
+          ]
+        },
+        {
+          "name": "warnings",
+          "type": "array<ValidationIssue>",
+          "required": false,
+          "description": "Warnings that may need attention"
+        }
+      ]
+    },
+    { "name": "createdAt", "type": "datetime", "required": false, "description": "Payment initiation timestamp" },
+    { "name": "updatedAt", "type": "datetime", "required": false, "description": "Last status update timestamp" },
+    { "name": "metadata", "type": "map<string, string>", "required": false, "description": "Partner reference data" }
+  ]
+}

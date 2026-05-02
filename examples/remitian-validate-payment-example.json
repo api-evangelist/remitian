@@ -1,0 +1,40 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.remitian.com/v1/payments/pay_7f4a3b2c1d/validate",
+    "headers": {
+      "Authorization": "Bearer {api_key}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "pay_7f4a3b2c1d",
+      "status": "validated",
+      "amount": 15000.00,
+      "currency": "USD",
+      "taxType": "income_tax",
+      "taxPeriod": "2025",
+      "jurisdictionId": "us-irs",
+      "accountId": "acct_12345",
+      "taxIdentifier": "12-3456789",
+      "validationResults": {
+        "valid": true,
+        "errors": [],
+        "warnings": [
+          {
+            "code": "DEADLINE_APPROACHING",
+            "field": "taxPeriod",
+            "message": "Tax payment deadline for 2025 is April 15, 2026. Payment is overdue — penalty may apply."
+          }
+        ]
+      },
+      "confirmationNumber": null,
+      "createdAt": "2026-05-02T10:00:00Z",
+      "updatedAt": "2026-05-02T10:01:00Z",
+      "metadata": {
+        "client_ref": "CLIENT-2025-001"
+      }
+    }
+  }
+}

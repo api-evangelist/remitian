@@ -1,0 +1,159 @@
+vocabulary:
+  provider: Remitian
+  description: >-
+    Domain vocabulary for embedded tax payment infrastructure at Remitian —
+    covering tax payment lifecycle, jurisdictions, accounts, and audit compliance.
+  terms:
+    - term: Tax Payment
+      definition: >-
+        A payment made to a government tax authority to satisfy a tax
+        obligation. In Remitian, a payment progresses through a defined
+        lifecycle: draft → validated → confirmed → processing → completed.
+      tags:
+        - Payments
+        - Tax
+
+    - term: Jurisdiction
+      definition: >-
+        A government tax authority with the power to collect taxes. Remitian
+        supports federal (e.g., IRS), state, provincial, and local
+        jurisdictions. Each has specific tax types, required fields, and
+        routing rules.
+      tags:
+        - Jurisdictions
+        - Tax
+
+    - term: Payment Lifecycle
+      definition: >-
+        The sequence of states a Remitian tax payment passes through:
+        draft (initiated), validated (passed jurisdiction rules), confirmed
+        (irreversibly queued), processing (at tax authority), completed
+        (authority confirmed), or failed/cancelled.
+      tags:
+        - Payments
+        - Lifecycle
+
+    - term: Payment Initiation
+      definition: >-
+        The act of creating a new payment record in Remitian with the
+        amount, currency, tax type, tax period, jurisdiction, and account.
+        Initiating a payment does not immediately submit it to the tax authority.
+      tags:
+        - Payments
+        - Lifecycle
+
+    - term: Payment Validation
+      definition: >-
+        Jurisdiction-specific rule checking performed on a payment before
+        confirmation. Validates amounts, tax periods, identifiers, and
+        account details against the target authority's requirements.
+      tags:
+        - Payments
+        - Validation
+
+    - term: Payment Confirmation
+      definition: >-
+        The irreversible act of authorizing a validated payment for routing
+        to the tax authority. Once confirmed, a payment cannot be cancelled
+        and will be processed through verified banking connections.
+      tags:
+        - Payments
+        - Lifecycle
+
+    - term: Tax Type
+      definition: >-
+        The category of tax being paid to a jurisdiction (e.g., income_tax,
+        payroll_tax, estimated_tax, sales_tax, excise_tax). Available tax
+        types vary by jurisdiction.
+      tags:
+        - Tax
+        - Classification
+
+    - term: Tax Period
+      definition: >-
+        The fiscal period to which a tax payment applies, formatted as
+        a year (2025), quarter (2025-Q4), or month (2025-03).
+      tags:
+        - Tax
+        - Time
+
+    - term: Tax Identifier
+      definition: >-
+        A government-issued identifier for the taxpayer — such as an EIN
+        (Employer Identification Number), SSN (Social Security Number), or
+        BN (Business Number in Canada) — required by most jurisdictions.
+      tags:
+        - Tax
+        - Identity
+
+    - term: Client Account
+      definition: >-
+        A Remitian account representing an individual or entity making tax
+        payments. Accounts are linked to verified bank connections used to
+        fund payments routed to tax authorities.
+      tags:
+        - Accounts
+        - Payments
+
+    - term: Bank Connection
+      definition: >-
+        A verified link between a Remitian client account and a bank account.
+        Remitian routes confirmed tax payments directly from bank connections
+        to tax authorities without moving funds through Remitian's balance.
+      tags:
+        - Accounts
+        - Banking
+
+    - term: Confirmation Number
+      definition: >-
+        A unique reference number issued by the tax authority confirming
+        successful receipt and processing of a payment. Returned by Remitian
+        in the payment object upon completion.
+      tags:
+        - Payments
+        - Compliance
+
+    - term: Audit Log
+      definition: >-
+        A bank-grade immutable record of every event in a payment's lifecycle
+        including initiations, status transitions, actor information, and
+        IP addresses for compliance and reconciliation.
+      tags:
+        - Compliance
+        - Audit
+
+    - term: Webhook
+      definition: >-
+        A registered HTTPS endpoint that receives real-time Remitian payment
+        event notifications via HTTP POST. Events are signed with HMAC-SHA256
+        using the subscription's signing secret.
+      tags:
+        - Webhooks
+        - Events
+
+    - term: HMAC Signature
+      definition: >-
+        A cryptographic signature in the X-Remitian-Signature header that
+        partners use to verify webhook delivery authenticity. Generated
+        using HMAC-SHA256 with the webhook signing secret.
+      tags:
+        - Security
+        - Webhooks
+
+    - term: Embedded Payment
+      definition: >-
+        The integration pattern where Remitian's API is embedded directly
+        into a tax software or accounting platform so users initiate and
+        confirm tax payments without leaving the host application.
+      tags:
+        - Integration
+        - Embedded Payments
+
+    - term: Jurisdiction-Aware Routing
+      definition: >-
+        Remitian's capability to automatically determine the correct banking
+        route, format, and protocol for submitting payments to a specific
+        tax authority based on jurisdiction rules.
+      tags:
+        - Jurisdictions
+        - Routing
