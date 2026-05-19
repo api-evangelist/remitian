@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Remitian Tax Payment API — Webhooks
+  description: 'Remitian Tax Payment API — Webhooks. 3 operations. Lead operation: List webhook subscriptions. Self-contained
+    Naftiko capability covering one Remitian business surface.'
+  tags:
+  - Remitian
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REMITIAN_API_KEY: REMITIAN_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tax-payment-webhooks
+    baseUri: https://api.remitian.com
+    description: Remitian Tax Payment API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-webhooks
+      path: /v1/webhooks
+      operations:
+      - name: listwebhooksubscriptions
+        method: GET
+        description: List webhook subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhooksubscription
+        method: POST
+        description: Create a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-webhooks-webhookId
+      path: /v1/webhooks/{webhookId}
+      operations:
+      - name: deletewebhooksubscription
+        method: DELETE
+        description: Delete a webhook subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webhookId
+          in: path
+          type: string
+          description: Unique identifier of the webhook subscription
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.REMITIAN_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tax-payment-webhooks-rest
+    port: 8080
+    description: REST adapter for Remitian Tax Payment API — Webhooks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/webhooks
+      name: v1-webhooks
+      description: REST surface for v1-webhooks.
+      operations:
+      - method: GET
+        name: listwebhooksubscriptions
+        description: List webhook subscriptions
+        call: tax-payment-webhooks.listwebhooksubscriptions
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebhooksubscription
+        description: Create a webhook subscription
+        call: tax-payment-webhooks.createwebhooksubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/webhooks/{webhookid}
+      name: v1-webhooks-webhookid
+      description: REST surface for v1-webhooks-webhookId.
+      operations:
+      - method: DELETE
+        name: deletewebhooksubscription
+        description: Delete a webhook subscription
+        call: tax-payment-webhooks.deletewebhooksubscription
+        with:
+          webhookId: rest.webhookId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tax-payment-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Remitian Tax Payment API — Webhooks. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-webhook-subscriptions
+      description: List webhook subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tax-payment-webhooks.listwebhooksubscriptions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook-subscription
+      description: Create a webhook subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tax-payment-webhooks.createwebhooksubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-webhook-subscription
+      description: Delete a webhook subscription
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tax-payment-webhooks.deletewebhooksubscription
+      with:
+        webhookId: tools.webhookId
+      outputParameters:
+      - type: object
+        mapping: $.
