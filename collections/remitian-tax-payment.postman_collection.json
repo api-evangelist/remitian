@@ -1,0 +1,3248 @@
+{
+  "item": [
+    {
+      "id": "2a3cec14-ea33-4c0b-aa4c-047bc54c35d3",
+      "name": "Accounts",
+      "description": {
+        "content": "Manage client accounts and their linked bank connections for tax payment processing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f58e824c-6681-434f-9c5b-cc8650b15314",
+          "name": "List client accounts",
+          "request": {
+            "name": "List client accounts",
+            "description": {
+              "content": "Retrieve a list of client accounts registered for tax payment processing, including their linked bank connections and verification status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6753a656-33f1-4224-9a15-119699c6889c",
+              "name": "A list of client accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"x3uzWxw98o7d@qPRrVGREpuYxNCBXrOFZXTbukEZhvv.rnpb\",\n      \"bankConnections\": [\n        {\n          \"id\": \"string\",\n          \"institutionName\": \"string\",\n          \"accountLast4\": \"6069\",\n          \"status\": \"verified\",\n          \"verifiedAt\": \"1986-02-26T13:03:02.867Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"institutionName\": \"string\",\n          \"accountLast4\": \"4817\",\n          \"status\": \"pending\",\n          \"verifiedAt\": \"1975-01-22T09:34:05.561Z\"\n        }\n      ],\n      \"status\": \"pending\",\n      \"createdAt\": \"1949-04-24T16:02:20.716Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"5TrD-ILKZA4N7J@DPzsRpcJoEecuDSwihmv.inux\",\n      \"bankConnections\": [\n        {\n          \"id\": \"string\",\n          \"institutionName\": \"string\",\n          \"accountLast4\": \"1485\",\n          \"status\": \"verified\",\n          \"verifiedAt\": \"1959-09-14T09:27:23.129Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"institutionName\": \"string\",\n          \"accountLast4\": \"6291\",\n          \"status\": \"verified\",\n          \"verifiedAt\": \"2001-12-31T01:05:41.819Z\"\n        }\n      ],\n      \"status\": \"suspended\",\n      \"createdAt\": \"1970-08-11T16:09:09.058Z\"\n    }\n  ],\n  \"pagination\": {\n    \"total\": 2005,\n    \"limit\": 8733,\n    \"offset\": 5671,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8426627-b7ef-438e-b817-69f13532caf6",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d5505d0-d9c2-48b6-b332-342a428f6aad",
+          "name": "Create a client account",
+          "request": {
+            "name": "Create a client account",
+            "description": {
+              "content": "Register a new client account for tax payment processing. The account must be linked to a verified bank connection before payments can be initiated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4833abd2-aa35-4f95-a70c-3f3f271c7fa6",
+              "name": "Account created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"QGLTgipAq55P@EACdkJnTmdfrAEo.xe\",\n  \"bankConnections\": [\n    {\n      \"id\": \"string\",\n      \"institutionName\": \"string\",\n      \"accountLast4\": \"4006\",\n      \"status\": \"pending\",\n      \"verifiedAt\": \"1950-05-31T00:19:40.822Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"institutionName\": \"string\",\n      \"accountLast4\": \"2748\",\n      \"status\": \"failed\",\n      \"verifiedAt\": \"1961-03-22T19:52:37.624Z\"\n    }\n  ],\n  \"status\": \"pending\",\n  \"createdAt\": \"1958-07-21T08:48:31.140Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5552c5d-08d5-405b-9ec5-47039e2be7ff",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5c2daad-5172-4822-9399-22b93e5707bc",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62f44cb2-fb63-486e-b898-273b11865421",
+          "name": "Retrieve a client account",
+          "request": {
+            "name": "Retrieve a client account",
+            "description": {
+              "content": "Retrieve the details of a specific client account, including linked bank connections and payment history summary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Unique identifier of the client account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e8e3ce3-4021-4b06-a55a-3bf4bacbd1d2",
+              "name": "Account details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Unique identifier of the client account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"email\": \"QGLTgipAq55P@EACdkJnTmdfrAEo.xe\",\n  \"bankConnections\": [\n    {\n      \"id\": \"string\",\n      \"institutionName\": \"string\",\n      \"accountLast4\": \"4006\",\n      \"status\": \"pending\",\n      \"verifiedAt\": \"1950-05-31T00:19:40.822Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"institutionName\": \"string\",\n      \"accountLast4\": \"2748\",\n      \"status\": \"failed\",\n      \"verifiedAt\": \"1961-03-22T19:52:37.624Z\"\n    }\n  ],\n  \"status\": \"pending\",\n  \"createdAt\": \"1958-07-21T08:48:31.140Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a1830d7-7546-46ab-af7d-241003dc2fb2",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Unique identifier of the client account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1988500-2753-428d-8672-527461dcd772",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Unique identifier of the client account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a6c5ba1a-c310-4dd2-ad02-bb09e198d342",
+      "name": "Audit Logs",
+      "description": {
+        "content": "Access bank-grade audit logs that track every payment from initiation to completion for compliance and reconciliation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aead5563-11b4-4649-b91a-a92236e43f8f",
+          "name": "List audit logs",
+          "request": {
+            "name": "List audit logs",
+            "description": {
+              "content": "Retrieve bank-grade audit logs that track every payment from initiation to completion. Supports filtering by payment, account, event type, and date range for compliance and reconciliation purposes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "audit-logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "paymentId",
+                  "value": "<string>",
+                  "description": "Filter logs by payment identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "accountId",
+                  "value": "<string>",
+                  "description": "Filter logs by account identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "eventType",
+                  "value": "<string>",
+                  "description": "Filter by audit event type"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFrom",
+                  "value": "<date>",
+                  "description": "Filter results from this date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateTo",
+                  "value": "<date>",
+                  "description": "Filter results up to this date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85c2f5b0-2b4e-4882-a6ff-b78b67a6da63",
+              "name": "A paginated list of audit log entries",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"paymentId\": \"string\",\n      \"accountId\": \"string\",\n      \"eventType\": \"payment.confirmed\",\n      \"description\": \"string\",\n      \"actor\": \"string\",\n      \"ipAddress\": \"string\",\n      \"timestamp\": \"1998-11-11T20:23:02.834Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": 8169.247828932596\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"paymentId\": \"string\",\n      \"accountId\": \"string\",\n      \"eventType\": \"payment.confirmed\",\n      \"description\": \"string\",\n      \"actor\": \"string\",\n      \"ipAddress\": \"string\",\n      \"timestamp\": \"1951-03-07T15:02:31.514Z\",\n      \"metadata\": {\n        \"key_0\": 9788\n      }\n    }\n  ],\n  \"pagination\": {\n    \"total\": 3682,\n    \"limit\": 1558,\n    \"offset\": 3785,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05118f24-28a9-41b0-a141-b0efd2581510",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "eventType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "46787871-a6ec-4c19-98d7-74336fa9f1c6",
+      "name": "Jurisdictions",
+      "description": {
+        "content": "Retrieve and manage supported tax jurisdictions and their associated payment requirements and routing rules.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3811f138-61e5-42bf-9c50-c268444192cb",
+          "name": "List supported jurisdictions",
+          "request": {
+            "name": "List supported jurisdictions",
+            "description": {
+              "content": "Retrieve the list of tax jurisdictions supported by Remitian, including federal, state, provincial, and local authorities. Each jurisdiction entry includes its payment requirements, accepted tax types, and routing configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "jurisdictions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "Filter by country code (ISO 3166-1 alpha-2)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by jurisdiction type"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3696d020-6192-4301-9cc4-04f1670a1b75",
+              "name": "A list of supported jurisdictions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"TZ\",\n      \"type\": \"local\",\n      \"taxTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requiredFields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"paymentMethods\": [\n        \"string\",\n        \"string\"\n      ],\n      \"active\": false\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"country\": \"NM\",\n      \"type\": \"provincial\",\n      \"taxTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"requiredFields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"paymentMethods\": [\n        \"string\",\n        \"string\"\n      ],\n      \"active\": true\n    }\n  ],\n  \"pagination\": {\n    \"total\": 1267,\n    \"limit\": 3943,\n    \"offset\": 3559,\n    \"hasMore\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b82b7e41-2ca9-41e2-b9d0-4973a8a9033b",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d225d047-b73f-4205-9c3c-e464db30d7d9",
+          "name": "Retrieve a jurisdiction",
+          "request": {
+            "name": "Retrieve a jurisdiction",
+            "description": {
+              "content": "Retrieve detailed information about a specific tax jurisdiction, including accepted tax types, payment deadlines, required fields, and routing details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "jurisdictions",
+                ":jurisdictionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jurisdictionId",
+                  "description": "(Required) Unique identifier of the jurisdiction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12cc2886-d889-43e4-901f-70acf2ea7728",
+              "name": "Jurisdiction details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier of the jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"XJ\",\n  \"type\": \"local\",\n  \"taxTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"requiredFields\": [\n    \"string\",\n    \"string\"\n  ],\n  \"paymentMethods\": [\n    \"string\",\n    \"string\"\n  ],\n  \"active\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d123ea7d-a7d2-43e3-8a08-c961aa83e716",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier of the jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ed854ab-ec05-4b1f-be02-dbbc9e68a879",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "jurisdictions",
+                    ":jurisdictionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jurisdictionId",
+                      "description": "(Required) Unique identifier of the jurisdiction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "98623776-2390-4e22-b3b4-c819dfdc2d9b",
+      "name": "Payments",
+      "description": {
+        "content": "Initiate, validate, and confirm tax payments across multiple jurisdictions through a single unified gateway.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cc2a051-debc-4e2e-9baa-527a24770cf2",
+          "name": "List payments",
+          "request": {
+            "name": "List payments",
+            "description": {
+              "content": "Retrieve a paginated list of tax payments. Supports filtering by jurisdiction, status, date range, and client account. Results are sorted by creation date in descending order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "jurisdictionId",
+                  "value": "<string>",
+                  "description": "Filter by jurisdiction identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by payment status"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFrom",
+                  "value": "<date>",
+                  "description": "Filter results from this date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateTo",
+                  "value": "<date>",
+                  "description": "Filter results up to this date (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip for pagination"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5361a461-27c9-4fe9-a566-53ea1f64f45f",
+              "name": "A paginated list of payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jurisdictionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"validated\",\n      \"amount\": 7422.931296159907,\n      \"currency\": \"USD\",\n      \"taxType\": \"income_tax\",\n      \"taxPeriod\": \"2025\",\n      \"jurisdictionId\": \"string\",\n      \"accountId\": \"string\",\n      \"validationResults\": {\n        \"valid\": true,\n        \"errors\": [\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"warnings\": [\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      },\n      \"confirmationNumber\": \"string\",\n      \"createdAt\": \"1980-01-03T16:42:11.676Z\",\n      \"updatedAt\": \"1973-11-22T08:32:35.807Z\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"confirmed\",\n      \"amount\": 8255.639614375943,\n      \"currency\": \"USD\",\n      \"taxType\": \"income_tax\",\n      \"taxPeriod\": \"2025\",\n      \"jurisdictionId\": \"string\",\n      \"accountId\": \"string\",\n      \"validationResults\": {\n        \"valid\": false,\n        \"errors\": [\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          }\n        ],\n        \"warnings\": [\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          },\n          {\n            \"code\": \"string\",\n            \"field\": \"string\",\n            \"message\": \"string\"\n          }\n        ]\n      },\n      \"confirmationNumber\": \"string\",\n      \"createdAt\": \"1949-03-23T13:17:31.481Z\",\n      \"updatedAt\": \"2000-02-06T01:01:56.136Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"total\": 7481,\n    \"limit\": 5431,\n    \"offset\": 8075,\n    \"hasMore\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19377968-3b1a-46bc-8264-93e574a0a73a",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "jurisdictionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "dateTo",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb555151-638b-40dc-bec9-96a8fe10c958",
+          "name": "Initiate a tax payment",
+          "request": {
+            "name": "Initiate a tax payment",
+            "description": {
+              "content": "Initiate a new tax payment to a specific jurisdiction. The API validates the payment details against jurisdiction-specific rules, routes it to the appropriate tax authority, and returns a payment object with a unique identifier for tracking. Payments move directly from client accounts to tax authorities through verified banking connections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"<string>\",\n  \"taxType\": \"<string>\",\n  \"taxPeriod\": \"<string>\",\n  \"jurisdictionId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbf94d1c-c020-4fbf-9220-ac014cad5a1e",
+              "name": "Payment initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"validated\",\n  \"amount\": 7332.044697296862,\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"string\",\n  \"accountId\": \"string\",\n  \"validationResults\": {\n    \"valid\": false,\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"warnings\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  },\n  \"confirmationNumber\": \"string\",\n  \"createdAt\": \"2018-05-20T02:17:22.145Z\",\n  \"updatedAt\": \"2021-05-27T22:40:57.798Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4218f832-527b-4552-b2b3-75806693b7c8",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53df0ba7-5a4b-4d30-9379-be40d9de179a",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f176268c-a0be-46b1-bd46-1ce3ff63c23a",
+              "name": "Validation failed against jurisdiction rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<double>\",\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"taxIdentifier\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b356586-5a6e-45f5-bfe0-9d66123495c1",
+          "name": "Retrieve a payment",
+          "request": {
+            "name": "Retrieve a payment",
+            "description": {
+              "content": "Retrieve the full details of a specific tax payment, including its current status, jurisdiction routing information, validation results, and audit trail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments",
+                ":paymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Unique identifier of the payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1fc0a99-17af-4ac9-a68f-e574166522c0",
+              "name": "Payment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"validated\",\n  \"amount\": 7332.044697296862,\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"string\",\n  \"accountId\": \"string\",\n  \"validationResults\": {\n    \"valid\": false,\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"warnings\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  },\n  \"confirmationNumber\": \"string\",\n  \"createdAt\": \"2018-05-20T02:17:22.145Z\",\n  \"updatedAt\": \"2021-05-27T22:40:57.798Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c19a482d-6266-469b-afe7-845a797ca486",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1762b44a-ac54-4e02-833d-45ee350d591c",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "168bd24d-b35c-495e-bea3-3596cb65b517",
+          "name": "Validate a payment",
+          "request": {
+            "name": "Validate a payment",
+            "description": {
+              "content": "Run jurisdiction-specific validation on a payment before confirmation. Checks payment amounts, tax periods, jurisdiction-specific identifiers, and account details against the rules of the target tax authority. Returns validation results with any errors or warnings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments",
+                ":paymentId",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Unique identifier of the payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "766d0a4f-4c19-45b8-abb7-7b529184b1e1",
+              "name": "Validation results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"valid\": false,\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1d3a06f-3e11-45b6-9869-333d3b94b856",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb0110d7-3128-4f9f-9ac3-4902904c042d",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa4384bc-8bc0-4743-b493-48685d86c3a4",
+          "name": "Confirm a payment",
+          "request": {
+            "name": "Confirm a payment",
+            "description": {
+              "content": "Confirm a validated payment for processing. Once confirmed, the payment is routed to the appropriate tax authority through verified banking connections. This action is irreversible. The payment status will transition to \"processing\" and subsequent updates will be delivered via webhooks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments",
+                ":paymentId",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Unique identifier of the payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4617e910-89d3-420f-a251-da4b8c415a26",
+              "name": "Payment confirmed and queued for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"validated\",\n  \"amount\": 7332.044697296862,\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"string\",\n  \"accountId\": \"string\",\n  \"validationResults\": {\n    \"valid\": false,\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"warnings\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  },\n  \"confirmationNumber\": \"string\",\n  \"createdAt\": \"2018-05-20T02:17:22.145Z\",\n  \"updatedAt\": \"2021-05-27T22:40:57.798Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5990864-0e53-4546-8b1c-85fd88ba0272",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aba9f70-ac92-41cc-8e12-f0d8e68a2fad",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61610113-46e0-4bb7-8210-0a281db27652",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df63150e-452d-46af-9cff-f321935b97d2",
+              "name": "Payment is not in a confirmable state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85f07c34-6380-4c50-99bc-4004c2fcf301",
+          "name": "Cancel a payment",
+          "request": {
+            "name": "Cancel a payment",
+            "description": {
+              "content": "Cancel a payment that has not yet been confirmed or is still in a cancellable processing state. Returns the updated payment object with a cancelled status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "payments",
+                ":paymentId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) Unique identifier of the payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "884c183c-cff5-47d4-9373-fe30bc50713c",
+              "name": "Payment cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"validated\",\n  \"amount\": 7332.044697296862,\n  \"currency\": \"USD\",\n  \"taxType\": \"income_tax\",\n  \"taxPeriod\": \"2025\",\n  \"jurisdictionId\": \"string\",\n  \"accountId\": \"string\",\n  \"validationResults\": {\n    \"valid\": false,\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ],\n    \"warnings\": [\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"code\": \"string\",\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  },\n  \"confirmationNumber\": \"string\",\n  \"createdAt\": \"2018-05-20T02:17:22.145Z\",\n  \"updatedAt\": \"2021-05-27T22:40:57.798Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a45bfa0a-4393-474f-9bdd-89160c226f59",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ebd412-ca68-4412-9bed-fb419665e04d",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4bfb824-c1c0-43e8-8df4-c44adaaac4f6",
+              "name": "Payment cannot be cancelled in its current state",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "payments",
+                    ":paymentId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) Unique identifier of the payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a0e39338-888e-4367-8b15-564a50254448",
+      "name": "Webhooks",
+      "description": {
+        "content": "Manage webhook subscriptions for real-time payment status updates and event notifications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e82db3d-696a-4fb1-92e4-8dd76b1b0546",
+          "name": "List webhook subscriptions",
+          "request": {
+            "name": "List webhook subscriptions",
+            "description": {
+              "content": "Retrieve a list of registered webhook subscriptions for receiving real-time payment status updates and event notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7ae83af-be88-4575-8eca-eba932a5e378",
+              "name": "A list of webhook subscriptions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"https://DYqustiPYFULhwispNoPeACvRVF.wmi,uo\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"signingSecret\": \"string\",\n      \"active\": false,\n      \"createdAt\": \"1989-02-05T19:24:09.061Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"http://QQshFr.wuqnjIhMQEM7ELliaPxkIFGNC-aDdkAzf0l7GUCxo.SxRt3vYyDOa-bwRS6MV\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"signingSecret\": \"string\",\n      \"active\": false,\n      \"createdAt\": \"1970-04-27T03:26:45.176Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc49b6d8-0a1c-4962-b4b6-54357a32dae4",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bde1f1b-7006-440f-b70b-a1affa231096",
+          "name": "Create a webhook subscription",
+          "request": {
+            "name": "Create a webhook subscription",
+            "description": {
+              "content": "Register a new webhook endpoint to receive real-time notifications for payment events. The endpoint must be a publicly accessible HTTPS URL. A signing secret is returned for verifying webhook delivery authenticity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bce5a04f-a9ba-406d-bda4-9b39615a7762",
+              "name": "Webhook subscription created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"url\": \"https://bDyinLaSAZovzXAubCxYd.nyw\",\n  \"events\": [\n    \"string\",\n    \"string\"\n  ],\n  \"signingSecret\": \"string\",\n  \"active\": false,\n  \"createdAt\": \"1977-08-10T01:48:07.611Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ace033d-89d5-4957-94e4-02fa0ae706c7",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f0d1494-69b5-4363-bf91-69ab7a123aec",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2339282a-de5c-4a13-88ee-8bc62a82f235",
+          "name": "Delete a webhook subscription",
+          "request": {
+            "name": "Delete a webhook subscription",
+            "description": {
+              "content": "Remove a webhook subscription. The endpoint will no longer receive event notifications after deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "webhooks",
+                ":webhookId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhookId",
+                  "description": "(Required) Unique identifier of the webhook subscription"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69b43e34-302e-41b9-b865-d4e24fc6404d",
+              "name": "Webhook subscription deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) Unique identifier of the webhook subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd7d884b-0a20-49c9-97e1-a3970a597791",
+              "name": "Missing or invalid authentication credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) Unique identifier of the webhook subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d66cd03a-25a2-4a81-9d85-2be485934afa",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "webhooks",
+                    ":webhookId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhookId",
+                      "description": "(Required) Unique identifier of the webhook subscription"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"details\": [\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      },\n      {\n        \"field\": \"string\",\n        \"message\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.remitian.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1763e365-4c47-4dc7-82ca-16500d0785e6",
+    "name": "Remitian Tax Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation, validation, and confirmation directly within their existing platforms. Described as the \"Stripe for tax,\" the API acts as a unified gateway to multiple tax authorities, replacing manual government portal logins with automated, jurisdiction-aware payment infrastructure. It provides real-time status updates via webhooks and bank-grade audit logs to track every payment from initiation to completion. Built by accountants for accountants, the API supports managing payments across multiple tax jurisdictions from a single integration point.\n\nContact Support:\n Name: Remitian Support",
+      "type": "text/plain"
+    }
+  }
+}

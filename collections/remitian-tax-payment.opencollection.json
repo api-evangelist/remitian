@@ -1,0 +1,411 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remitian Tax Payment API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/payments",
+            "params": [
+              {
+                "name": "jurisdictionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by jurisdiction identifier"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by payment status"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Filter results from this date (ISO 8601)"
+              },
+              {
+                "name": "dateTo",
+                "value": "",
+                "type": "query",
+                "description": "Filter results up to this date (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of tax payments. Supports filtering by jurisdiction, status, date range, and client account. Results are sorted by creation date in descending order."
+        },
+        {
+          "info": {
+            "name": "Initiate a tax payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a new tax payment to a specific jurisdiction. The API validates the payment details against jurisdiction-specific rules, routes it to the appropriate tax authority, and returns a payment object with a unique identifier for tracking. Payments move directly from client accounts to tax authorities through verified banking connections."
+        },
+        {
+          "info": {
+            "name": "Retrieve a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/payments/:paymentId",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ]
+          },
+          "docs": "Retrieve the full details of a specific tax payment, including its current status, jurisdiction routing information, validation results, and audit trail."
+        },
+        {
+          "info": {
+            "name": "Validate a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/payments/:paymentId/validate",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ]
+          },
+          "docs": "Run jurisdiction-specific validation on a payment before confirmation. Checks payment amounts, tax periods, jurisdiction-specific identifiers, and account details against the rules of the target tax authority. Returns validation results with any errors or warnings."
+        },
+        {
+          "info": {
+            "name": "Confirm a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/payments/:paymentId/confirm",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ]
+          },
+          "docs": "Confirm a validated payment for processing. Once confirmed, the payment is routed to the appropriate tax authority through verified banking connections. This action is irreversible. The payment status will transition to \"processing\" and subsequent updates will be delivered via webhooks."
+        },
+        {
+          "info": {
+            "name": "Cancel a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/payments/:paymentId/cancel",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ]
+          },
+          "docs": "Cancel a payment that has not yet been confirmed or is still in a cancellable processing state. Returns the updated payment object with a cancelled status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jurisdictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported jurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/jurisdictions",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country code (ISO 3166-1 alpha-2)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by jurisdiction type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of tax jurisdictions supported by Remitian, including federal, state, provincial, and local authorities. Each jurisdiction entry includes its payment requirements, accepted tax types, and routing configuration."
+        },
+        {
+          "info": {
+            "name": "Retrieve a jurisdiction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/jurisdictions/:jurisdictionId",
+            "params": [
+              {
+                "name": "jurisdictionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the jurisdiction"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific tax jurisdiction, including accepted tax types, payment deadlines, required fields, and routing details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List client accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/accounts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of client accounts registered for tax payment processing, including their linked bank connections and verification status."
+        },
+        {
+          "info": {
+            "name": "Create a client account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new client account for tax payment processing. The account must be linked to a verified bank connection before payments can be initiated."
+        },
+        {
+          "info": {
+            "name": "Retrieve a client account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the client account"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific client account, including linked bank connections and payment history summary."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Audit Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/audit-logs",
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs by payment identifier"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs by account identifier"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by audit event type"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Filter results from this date (ISO 8601)"
+              },
+              {
+                "name": "dateTo",
+                "value": "",
+                "type": "query",
+                "description": "Filter results up to this date (ISO 8601)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve bank-grade audit logs that track every payment from initiation to completion. Supports filtering by payment, account, event type, and date range for compliance and reconciliation purposes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/webhooks"
+          },
+          "docs": "Retrieve a list of registered webhook subscriptions for receiving real-time payment status updates and event notifications."
+        },
+        {
+          "info": {
+            "name": "Create a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new webhook endpoint to receive real-time notifications for payment events. The endpoint must be a publicly accessible HTTPS URL. A signing secret is returned for verifying webhook delivery authenticity."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.remitian.com/v1/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the webhook subscription"
+              }
+            ]
+          },
+          "docs": "Remove a webhook subscription. The endpoint will no longer receive event notifications after deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
