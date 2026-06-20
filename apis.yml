@@ -7,7 +7,7 @@ description: >-
   $7M in seed funding in 2026 and enables partners to embed payment initiation, validation, and confirmation directly
   within their existing platforms, replacing manual government portal logins with automated payment infrastructure.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Tax
   - Payments
