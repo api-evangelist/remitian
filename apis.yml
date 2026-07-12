@@ -44,6 +44,10 @@ apis:
       - type: AsyncAPI
         url: asyncapi/remitian-tax-payment-asyncapi.yml
 common:
+  - type: DomainSecurity
+    url: security/remitian-domain-security.yml
+  - type: Authentication
+    url: authentication/remitian-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/remitian
   - type: Website
