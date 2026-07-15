@@ -44,6 +44,8 @@ apis:
       - type: AsyncAPI
         url: asyncapi/remitian-tax-payment-asyncapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/remitian-agentic-access.yml
   - type: DomainSecurity
     url: security/remitian-domain-security.yml
   - type: Authentication
