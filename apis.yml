@@ -7,7 +7,20 @@ description: >-
   $7M in seed funding in 2026 and enables partners to embed payment initiation, validation, and confirmation directly
   within their existing platforms, replacing manual government portal logins with automated payment infrastructure.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/remitian.png
 tags:
   - Tax
   - Payments
@@ -20,29 +33,83 @@ created: '2026-03-24'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: remitian:tax-payment-api
-    name: Remitian Tax Payment API
-    description: >-
-      The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation,
-      validation, and confirmation directly within their platforms. The API acts as a unified gateway to multiple tax
-      authorities, replacing manual government portal logins with automated, jurisdiction-aware payment infrastructure.
-      It provides real-time status updates via webhooks and bank-grade audit logs.
-    humanURL: https://remitian.com/integrations/integrate-remitian
-    baseURL: https://api.remitian.com
-    tags:
-      - Tax
-      - Payments
-      - Fintech
-      - Accounting
-      - Jurisdictions
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://remitian.com/integrations/integrate-remitian
-      - type: OpenAPI
-        url: openapi/remitian-tax-payment-openapi.yml
-      - type: AsyncAPI
-        url: asyncapi/remitian-tax-payment-asyncapi.yml
+- aid: remitian:remitian-accounts-api
+  name: Remitian Accounts API
+  description: Manage client accounts and their linked bank connections for tax payment processing.
+  humanURL: https://remitian.com/integrations/integrate-remitian
+  baseURL: https://api.remitian.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/remitian-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://remitian.com/integrations/integrate-remitian
+  - type: AsyncAPI
+    url: asyncapi/remitian-tax-payment-asyncapi.yml
+- aid: remitian:remitian-audit-logs-api
+  name: Remitian Audit Logs API
+  description: >-
+    Access bank-grade audit logs that track every payment from initiation to completion for compliance
+    and reconciliation.
+  humanURL: https://remitian.com/integrations/integrate-remitian
+  baseURL: https://api.remitian.com
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/remitian-audit-logs-api-openapi.yml
+  - type: Documentation
+    url: https://remitian.com/integrations/integrate-remitian
+  - type: AsyncAPI
+    url: asyncapi/remitian-tax-payment-asyncapi.yml
+- aid: remitian:remitian-jurisdictions-api
+  name: Remitian Jurisdictions API
+  description: >-
+    Retrieve and manage supported tax jurisdictions and their associated payment requirements and routing
+    rules.
+  humanURL: https://remitian.com/integrations/integrate-remitian
+  baseURL: https://api.remitian.com
+  tags:
+  - Jurisdictions
+  properties:
+  - type: OpenAPI
+    url: openapi/remitian-jurisdictions-api-openapi.yml
+  - type: Documentation
+    url: https://remitian.com/integrations/integrate-remitian
+  - type: AsyncAPI
+    url: asyncapi/remitian-tax-payment-asyncapi.yml
+- aid: remitian:remitian-payments-api
+  name: Remitian Payments API
+  description: >-
+    Initiate, validate, and confirm tax payments across multiple jurisdictions through a single unified
+    gateway.
+  humanURL: https://remitian.com/integrations/integrate-remitian
+  baseURL: https://api.remitian.com
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/remitian-payments-api-openapi.yml
+  - type: Documentation
+    url: https://remitian.com/integrations/integrate-remitian
+  - type: AsyncAPI
+    url: asyncapi/remitian-tax-payment-asyncapi.yml
+- aid: remitian:remitian-webhooks-api
+  name: Remitian Webhooks API
+  description: >-
+    Manage webhook subscriptions for real-time payment status updates and event notifications.
+  humanURL: https://remitian.com/integrations/integrate-remitian
+  baseURL: https://api.remitian.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/remitian-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://remitian.com/integrations/integrate-remitian
+  - type: AsyncAPI
+    url: asyncapi/remitian-tax-payment-asyncapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/remitian-agentic-access.yml
