@@ -1,0 +1,22 @@
+{
+  "provider": "remitian",
+  "sources": [
+    "remitian-accounts-api-openapi.yml",
+    "remitian-audit-logs-api-openapi.yml",
+    "remitian-jurisdictions-api-openapi.yml",
+    "remitian-payments-api-openapi.yml",
+    "remitian-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "remitian-accounts-api-openapi.yml",
+    "remitian-audit-logs-api-openapi.yml",
+    "remitian-jurisdictions-api-openapi.yml",
+    "remitian-payments-api-openapi.yml",
+    "remitian-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
