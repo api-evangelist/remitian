@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remitian Tax Payment Accounts Webhooks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/webhooks"
+          },
+          "docs": "Retrieve a list of registered webhook subscriptions for receiving real-time payment status updates and event notifications."
+        },
+        {
+          "info": {
+            "name": "Create a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.remitian.com/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a new webhook endpoint to receive real-time notifications for payment events. The endpoint must be a publicly accessible HTTPS URL. A signing secret is returned for verifying webhook delivery authenticity."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.remitian.com/v1/webhooks/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the webhook subscription"
+              }
+            ]
+          },
+          "docs": "Remove a webhook subscription. The endpoint will no longer receive event notifications after deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

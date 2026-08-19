@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remitian Tax Payment Accounts Jurisdictions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jurisdictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported jurisdictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/jurisdictions",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country code (ISO 3166-1 alpha-2)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by jurisdiction type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve the list of tax jurisdictions supported by Remitian, including federal, state, provincial, and local authorities. Each jurisdiction entry includes its payment requirements, accepted tax types, and routing configuration."
+        },
+        {
+          "info": {
+            "name": "Retrieve a jurisdiction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.remitian.com/v1/jurisdictions/:jurisdictionId",
+            "params": [
+              {
+                "name": "jurisdictionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the jurisdiction"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific tax jurisdiction, including accepted tax types, payment deadlines, required fields, and routing details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
