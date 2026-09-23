@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Remitian Tax Payment Accounts API
-  description: The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation, validation, and confirmation directly within their existing platforms. Described as the "Stripe for tax," the API acts as a unified gateway to multiple tax authorities, replacing manual government portal logins with automated, jurisdiction-aware payment infrastructure. It provides real-time status updates via webhooks and bank-grade audit logs to track every payment from initiation to completion. Built by accountants for accountants, the API supports managing payments across multiple tax jurisdictions from a single integration point.
+  description: The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation, validation, and confirmation directly within their existing platforms.
   version: 1.0.0
   contact:
     name: Remitian Support
@@ -121,6 +121,44 @@ components:
           type: string
           format: date-time
           description: Timestamp when the account was created
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        limit:
+          type: integer
+          description: Maximum results per page
+        offset:
+          type: integer
+          description: Current offset
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+    AccountCreateRequest:
+      type: object
+      required:
+      - name
+      - email
+      properties:
+        name:
+          type: string
+          description: Display name for the client account
+          minLength: 1
+          maxLength: 255
+        email:
+          type: string
+          format: email
+          description: Contact email for the account
+        taxIdentifier:
+          type: string
+          description: Primary taxpayer identification number
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Arbitrary key-value pairs for reference data
     BankConnection:
       type: object
       properties:
@@ -145,44 +183,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the connection was verified
-    AccountCreateRequest:
-      type: object
-      required:
-      - name
-      - email
-      properties:
-        name:
-          type: string
-          description: Display name for the client account
-          minLength: 1
-          maxLength: 255
-        email:
-          type: string
-          format: email
-          description: Contact email for the account
-        taxIdentifier:
-          type: string
-          description: Primary taxpayer identification number
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Arbitrary key-value pairs for reference data
-    Pagination:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        limit:
-          type: integer
-          description: Maximum results per page
-        offset:
-          type: integer
-          description: Current offset
-        hasMore:
-          type: boolean
-          description: Whether more results are available
     Error:
       type: object
       properties:
@@ -226,12 +226,6 @@ components:
         minimum: 0
         default: 0
   responses:
-    Unauthorized:
-      description: Missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request parameters
       content:
@@ -240,6 +234,12 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication credentials
       content:
         application/json:
           schema:
