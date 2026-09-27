@@ -171,22 +171,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ValidationResult:
+    ValidationIssue:
       type: object
       properties:
-        valid:
-          type: boolean
-          description: Whether the payment passed all validation checks
-        errors:
-          type: array
-          description: List of validation errors that must be resolved
-          items:
-            $ref: '#/components/schemas/ValidationIssue'
-        warnings:
-          type: array
-          description: List of validation warnings that may need attention
-          items:
-            $ref: '#/components/schemas/ValidationIssue'
+        code:
+          type: string
+          description: Machine-readable error or warning code
+        field:
+          type: string
+          description: The field that triggered the validation issue
+        message:
+          type: string
+          description: Human-readable description of the issue
     Pagination:
       type: object
       properties:
@@ -202,18 +198,6 @@ components:
         hasMore:
           type: boolean
           description: Whether more results are available
-    ValidationIssue:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error or warning code
-        field:
-          type: string
-          description: The field that triggered the validation issue
-        message:
-          type: string
-          description: Human-readable description of the issue
     PaymentInitiationRequest:
       type: object
       required:
@@ -256,30 +240,22 @@ components:
           additionalProperties:
             type: string
           description: Arbitrary key-value pairs for partner-specific reference data
-    Error:
+    ValidationResult:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Machine-readable error code
-            message:
-              type: string
-              description: Human-readable error message
-            details:
-              type: array
-              description: Detailed error information
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                    description: Field related to the error
-                  message:
-                    type: string
-                    description: Detail about the field error
+        valid:
+          type: boolean
+          description: Whether the payment passed all validation checks
+        errors:
+          type: array
+          description: List of validation errors that must be resolved
+          items:
+            $ref: '#/components/schemas/ValidationIssue'
+        warnings:
+          type: array
+          description: List of validation warnings that may need attention
+          items:
+            $ref: '#/components/schemas/ValidationIssue'
     Payment:
       type: object
       properties:
@@ -339,21 +315,50 @@ components:
           additionalProperties:
             type: string
           description: Arbitrary key-value pairs for partner-specific reference data
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable error code
+            message:
+              type: string
+              description: Human-readable error message
+            details:
+              type: array
+              description: Detailed error information
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: Field related to the error
+                  message:
+                    type: string
+                    description: Detail about the field error
+  responses:
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    DateFromFilter:
-      name: dateFrom
-      in: query
-      description: Filter results from this date (ISO 8601)
-      schema:
-        type: string
-        format: date
-    PaymentId:
-      name: paymentId
-      in: path
-      required: true
-      description: Unique identifier of the payment
-      schema:
-        type: string
     PageOffset:
       name: offset
       in: query
@@ -362,22 +367,6 @@ components:
         type: integer
         minimum: 0
         default: 0
-    PageLimit:
-      name: limit
-      in: query
-      description: Maximum number of results to return per page
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 25
-    DateToFilter:
-      name: dateTo
-      in: query
-      description: Filter results up to this date (ISO 8601)
-      schema:
-        type: string
-        format: date
     StatusFilter:
       name: status
       in: query
@@ -392,31 +381,42 @@ components:
         - completed
         - failed
         - cancelled
+    DateToFilter:
+      name: dateTo
+      in: query
+      description: Filter results up to this date (ISO 8601)
+      schema:
+        type: string
+        format: date
     JurisdictionFilter:
       name: jurisdictionId
       in: query
       description: Filter by jurisdiction identifier
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Requested resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    DateFromFilter:
+      name: dateFrom
+      in: query
+      description: Filter results from this date (ISO 8601)
+      schema:
+        type: string
+        format: date
+    PaymentId:
+      name: paymentId
+      in: path
+      required: true
+      description: Unique identifier of the payment
+      schema:
+        type: string
+    PageLimit:
+      name: limit
+      in: query
+      description: Maximum number of results to return per page
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
   securitySchemes:
     bearerAuth:
       type: http
