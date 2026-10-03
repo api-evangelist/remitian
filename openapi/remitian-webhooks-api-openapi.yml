@@ -83,6 +83,30 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable error code
+            message:
+              type: string
+              description: Human-readable error message
+            details:
+              type: array
+              description: Detailed error information
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: Field related to the error
+                  message:
+                    type: string
+                    description: Detail about the field error
     WebhookSubscriptionRequest:
       type: object
       required:
@@ -124,39 +148,15 @@ components:
           type: string
           format: date-time
           description: Timestamp when the subscription was created
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Machine-readable error code
-            message:
-              type: string
-              description: Human-readable error message
-            details:
-              type: array
-              description: Detailed error information
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                    description: Field related to the error
-                  message:
-                    type: string
-                    description: Detail about the field error
   responses:
-    NotFound:
-      description: Requested resource not found
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request parameters
+    NotFound:
+      description: Requested resource not found
       content:
         application/json:
           schema:
