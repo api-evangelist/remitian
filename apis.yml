@@ -134,6 +134,9 @@ apis:
   - type: AsyncAPI
     url: asyncapi/remitian-tax-payment-asyncapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/remitian-capability-edges.yml
+    name: Remitian Business Capability Map
   - type: AgenticAccess
     url: agentic-access/remitian-agentic-access.yml
   - type: DomainSecurity
