@@ -171,30 +171,33 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    ValidationIssue:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Machine-readable error code
-            message:
-              type: string
-              description: Human-readable error message
-            details:
-              type: array
-              description: Detailed error information
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                    description: Field related to the error
-                  message:
-                    type: string
-                    description: Detail about the field error
+        code:
+          type: string
+          description: Machine-readable error or warning code
+        field:
+          type: string
+          description: The field that triggered the validation issue
+        message:
+          type: string
+          description: Human-readable description of the issue
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        limit:
+          type: integer
+          description: Maximum results per page
+        offset:
+          type: integer
+          description: Current offset
+        hasMore:
+          type: boolean
+          description: Whether more results are available
     Payment:
       type: object
       properties:
@@ -270,6 +273,30 @@ components:
           description: List of validation warnings that may need attention
           items:
             $ref: '#/components/schemas/ValidationIssue'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable error code
+            message:
+              type: string
+              description: Human-readable error message
+            details:
+              type: array
+              description: Detailed error information
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: Field related to the error
+                  message:
+                    type: string
+                    description: Detail about the field error
     PaymentInitiationRequest:
       type: object
       required:
@@ -312,42 +339,7 @@ components:
           additionalProperties:
             type: string
           description: Arbitrary key-value pairs for partner-specific reference data
-    ValidationIssue:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error or warning code
-        field:
-          type: string
-          description: The field that triggered the validation issue
-        message:
-          type: string
-          description: Human-readable description of the issue
-    Pagination:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        limit:
-          type: integer
-          description: Maximum results per page
-        offset:
-          type: integer
-          description: Current offset
-        hasMore:
-          type: boolean
-          description: Whether more results are available
   parameters:
-    PageOffset:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
     PageLimit:
       name: limit
       in: query
@@ -371,6 +363,21 @@ components:
         - completed
         - failed
         - cancelled
+    DateToFilter:
+      name: dateTo
+      in: query
+      description: Filter results up to this date (ISO 8601)
+      schema:
+        type: string
+        format: date
+    PageOffset:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     DateFromFilter:
       name: dateFrom
       in: query
@@ -391,13 +398,6 @@ components:
       description: Filter by jurisdiction identifier
       schema:
         type: string
-    DateToFilter:
-      name: dateTo
-      in: query
-      description: Filter results up to this date (ISO 8601)
-      schema:
-        type: string
-        format: date
   responses:
     BadRequest:
       description: Invalid request parameters
