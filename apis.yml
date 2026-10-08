@@ -134,6 +134,12 @@ apis:
   - type: AsyncAPI
     url: asyncapi/remitian-tax-payment-asyncapi.yml
 common:
+  - type: Plans
+    url: plans/remitian-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/remitian-rate-limits.yml
+  - type: FinOps
+    url: finops/remitian-finops.yml
   - url: https://remitian.com/blog/
     type: Blog
   - type: CapabilityMap
