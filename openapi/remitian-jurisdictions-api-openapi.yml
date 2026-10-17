@@ -182,14 +182,14 @@ components:
         minimum: 0
         default: 0
   responses:
-    NotFound:
-      description: Requested resource not found
+    Unauthorized:
+      description: Missing or invalid authentication credentials
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication credentials
+    NotFound:
+      description: Requested resource not found
       content:
         application/json:
           schema:

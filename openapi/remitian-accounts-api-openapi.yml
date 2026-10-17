@@ -92,6 +92,69 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    BankConnection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique bank connection identifier
+        institutionName:
+          type: string
+          description: Name of the banking institution
+        accountLast4:
+          type: string
+          description: Last four digits of the bank account number
+          pattern: ^\d{4}$
+        status:
+          type: string
+          description: Connection verification status
+          enum:
+          - pending
+          - verified
+          - failed
+        verifiedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the connection was verified
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of results
+        limit:
+          type: integer
+          description: Maximum results per page
+        offset:
+          type: integer
+          description: Current offset
+        hasMore:
+          type: boolean
+          description: Whether more results are available
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Machine-readable error code
+            message:
+              type: string
+              description: Human-readable error message
+            details:
+              type: array
+              description: Detailed error information
+              items:
+                type: object
+                properties:
+                  field:
+                    type: string
+                    description: Field related to the error
+                  message:
+                    type: string
+                    description: Detail about the field error
     AccountCreateRequest:
       type: object
       required:
@@ -144,69 +207,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the account was created
-    Pagination:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of results
-        limit:
-          type: integer
-          description: Maximum results per page
-        offset:
-          type: integer
-          description: Current offset
-        hasMore:
-          type: boolean
-          description: Whether more results are available
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Machine-readable error code
-            message:
-              type: string
-              description: Human-readable error message
-            details:
-              type: array
-              description: Detailed error information
-              items:
-                type: object
-                properties:
-                  field:
-                    type: string
-                    description: Field related to the error
-                  message:
-                    type: string
-                    description: Detail about the field error
-    BankConnection:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique bank connection identifier
-        institutionName:
-          type: string
-          description: Name of the banking institution
-        accountLast4:
-          type: string
-          description: Last four digits of the bank account number
-          pattern: ^\d{4}$
-        status:
-          type: string
-          description: Connection verification status
-          enum:
-          - pending
-          - verified
-          - failed
-        verifiedAt:
-          type: string
-          format: date-time
-          description: Timestamp when the connection was verified
   parameters:
     PageLimit:
       name: limit
@@ -232,14 +232,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Requested resource not found
+    Unauthorized:
+      description: Missing or invalid authentication credentials
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid authentication credentials
+    NotFound:
+      description: Requested resource not found
       content:
         application/json:
           schema:
