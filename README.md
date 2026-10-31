@@ -1,4 +1,4 @@
-# Remitian (remitian)
+# Remitian
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,64 +66,175 @@
 
 Remitian is a fintech platform providing embedded tax payment infrastructure for tax software providers and accounting firms. Often described as the "Stripe for tax," Remitian offers a developer-friendly API that acts as a unified gateway to multiple tax authorities, enabling automated, jurisdiction-aware payment processing. The platform raised $7M in seed funding in 2026 and enables partners to embed payment initiation, validation, and confirmation directly within their existing platforms, replacing manual government portal logins with automated payment infrastructure.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/remitian/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/remitian/refs/heads/main/apis.yml)
+**Areas:** Tax · Payments · Fintech · Accounting · Webhook · Embedded Payments
 
-## Scope
+## Remitian on APIs.io
 
-- **Type:** Index
+Everything profiled for Remitian is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/remitian/](https://apis.io/providers/remitian/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Tax
-- Payments
-- Fintech
-- Accounting
-- Webhooks
-- Embedded Payments
+- [Remitian Accounts API](https://apis.io/apis/remitian/remitian-accounts-api/) — Manage client accounts and their linked bank connections for tax payment processing.
+- [Remitian Audit Logs API](https://apis.io/apis/remitian/remitian-audit-logs-api/) — Access bank-grade audit logs that track every payment from initiation to completion for compliance and reconciliation.
+- [Remitian Jurisdictions API](https://apis.io/apis/remitian/remitian-jurisdictions-api/) — Retrieve and manage supported tax jurisdictions and their associated payment requirements and routing rules.
+- [Remitian Payments API](https://apis.io/apis/remitian/remitian-payments-api/) — Initiate, validate, and confirm tax payments across multiple jurisdictions through a single unified gateway.
+- [Remitian Webhooks API](https://apis.io/apis/remitian/remitian-webhooks-api/) — Manage webhook subscriptions for real-time payment status updates and event notifications.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-24
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### Remitian Tax Payment API
+Event-driven and webhook contracts.
 
-The Remitian Tax Payment API enables tax software providers and accounting firms to embed tax payment initiation, validation, and confirmation directly within their platforms. The API acts as a unified gateway to multiple tax authorities, replacing manual government portal logins with automated, jurisdiction-aware payment infrastructure. It provides real-time status updates via webhooks and bank-grade audit logs.
+- [Remitian Tax Payment Events](https://apis.io/asyncapis/remitian/remitian-tax-payment-asyncapi/)
 
-- **Human URL:** [https://remitian.com/integrations/integrate-remitian](https://remitian.com/integrations/integrate-remitian)
-- **Base URL:** `https://api.remitian.com`
+#### Event channels (1)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Tax
-- Payments
-- Fintech
-- Accounting
-- Jurisdictions
-- Webhooks
+- [/webhook](https://apis.io/channels/remitian/webhook/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://remitian.com/integrations/integrate-remitian)
-- [OpenAPI](openapi/remitian-tax-payment-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/remitian-tax-payment.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/remitian-tax-payment.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/remitian-tax-payment-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Remitian Agentic Access](https://apis.io/agentic-access/remitian/remitian-agentic-access/)
 
-- [LinkedIn](https://www.linkedin.com/company/remitian)
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Remitian Tax Payment](https://apis.io/schemas/remitian/remitian-payment/)
+
+#### JSON Structure (1)
+
+Data models expressed in JSON Structure.
+
+- [Remitian Payment Structure](https://apis.io/json-structure/remitian/remitian-payment-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Remitian Context](https://apis.io/jsonld/remitian/remitian-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Remitian Vocabulary](https://apis.io/vocabularies/remitian/remitian-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Remitian Initiate Payment Example](https://apis.io/examples/remitian/remitian-initiate-payment-example/)
+- [Remitian List Jurisdictions Example](https://apis.io/examples/remitian/remitian-list-jurisdictions-example/)
+- [Remitian Validate Payment Example](https://apis.io/examples/remitian/remitian-validate-payment-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Remitian Tax Payment Accounts API](https://apis.io/collections/remitian/open-remitian-accounts-api/)
+- [Remitian Tax Payment Accounts Audit Logs API](https://apis.io/collections/remitian/open-remitian-audit-logs-api/)
+- [Remitian Tax Payment Accounts Jurisdictions API](https://apis.io/collections/remitian/open-remitian-jurisdictions-api/)
+- [Remitian Tax Payment Accounts Payments API](https://apis.io/collections/remitian/open-remitian-payments-api/)
+- [Remitian Tax Payment API](https://apis.io/collections/remitian/open-remitian-tax-payment/)
+- [Remitian Tax Payment Accounts Webhooks API](https://apis.io/collections/remitian/open-remitian-webhooks-api/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Remitian — asyncapi rules](https://apis.io/rules/remitian/remitian-asyncapi-spectral-rules/)
+- [Remitian — jsonschema rules](https://apis.io/rules/remitian/remitian-jsonschema-spectral-rules/)
+- [Remitian API Rules](https://apis.io/rules/remitian/remitian-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Remitian Authentication](https://apis.io/security/remitian/remitian-authentication/)
+- [Remitian Domain Security](https://apis.io/security/remitian/remitian-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Remitian Plans Pricing](https://apis.io/plans/remitian/remitian-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Remitian Rate Limits](https://apis.io/rate-limits/remitian/remitian-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Remitian Finops](https://apis.io/finops/remitian/remitian-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://remitian.com)
 - [Documentation](https://remitian.com/integrations/integrate-remitian)
-- [Help  Center](https://help.remitian.com)
-- [About](https://remitian.com/about-us)
-- [Integrations](https://remitian.com/integrations)
-- [Press](https://www.cpapracticeadvisor.com/2026/03/20/remitian-raises-7-million-unveils-tax-payment-api/180028/)
-- [L L Ms Txt](https://remitian.com/llms.txt)
+- [Blog](https://remitian.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 74.1 |
+| Contract quality | 62.9 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 26.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/remitian/](https://apis.io/providers/remitian/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Remitian: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/remitian/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
